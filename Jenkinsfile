@@ -4,8 +4,8 @@ pipeline {
     stage('Install Dependencies') {
       steps {
         sh '''
-          npm init -y
-          npm install newman newman-reporter-htmlextra
+          rm -rf node_modules package-lock.json
+          npm install newman@latest newman-reporter-htmlextra@latest --legacy-peer-deps
         '''
       }
     }
