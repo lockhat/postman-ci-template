@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"key": "baseUrl",
-			"value": "60.204.173.174:8080",
+			"value": "http://mall-admin:8080",
 			"type": "default",
 			"enabled": true
 		},
