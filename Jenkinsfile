@@ -5,8 +5,7 @@ pipeline {
       steps {
         sh '''
           rm -rf node_modules package-lock.json
-          npm init -y --scope=ci --name=postman-ci-template
-          npm install newman@4.6.1 newman-reporter-html@1.0.5 --legacy-peer-deps
+	  npm install --legacy-peer-deps
         '''
       }
     }
