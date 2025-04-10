@@ -4,8 +4,8 @@ pipeline {
     stage('Install Dependencies') {
       steps {
         sh '''
-          rm -rf node_modules package-lock.json
-          npm install newman@latest newman-reporter-htmlextra@latest --legacy-peer-deps
+          npm init -y
+          npm install newman newman-reporter-html
         '''
       }
     }
@@ -14,15 +14,15 @@ pipeline {
         sh '''
           npx newman run ./postman/collection.json \
             -e ./postman/environment.json \
-            -r cli,htmlextra \
-            --reporter-htmlextra-export reports/postman-report.html
+            -r cli,html \
+            --reporter-html-export postman-report.html
         '''
       }
     }
   }
   post {
     always {
-      archiveArtifacts artifacts: 'reports/postman-report.html', fingerprint: true
+      archiveArtifacts artifacts: 'postman-report.html', fingerprint: true
     }
   }
 }
