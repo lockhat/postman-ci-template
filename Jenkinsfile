@@ -3,12 +3,20 @@ pipeline {
   stages {
     stage('Install Dependencies') {
       steps {
-        sh 'npm install -g newman newman-reporter-html'
+        sh '''
+          npm init -y
+          npm install newman newman-reporter-html
+        '''
       }
     }
     stage('Run API Tests') {
       steps {
-        sh 'chmod +x run.sh && ./run.sh'
+        sh '''
+          npx newman run ./postman/collection.json \
+            -e ./postman/environment.json \
+            -r cli,html \
+            --reporter-html-export postman-report.html
+        '''
       }
     }
   }
